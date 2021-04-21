@@ -8,6 +8,8 @@ namespace Productry.Data.Context
         public ProductryDbContext(DbContextOptions<ProductryDbContext> options) : base(options) { }
 
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Cartao> Cartoes { get; set; }
+        public DbSet<Compra> Compras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

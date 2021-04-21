@@ -11,9 +11,11 @@ namespace Productry.Data.Mappings
             builder.ToTable("Produtos");
 
             builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id)
+                .ValueGeneratedOnAdd();
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(200)").IsRequired();
-            builder.Property(p => p.Data_Cadastro).HasColumnType("Date");
-            builder.Property(p => p.Valor_Unitario).HasPrecision(12, 2);
+            builder.Property(p => p.DataCadastro).HasColumnType("Date");
+
         }
     }
 }

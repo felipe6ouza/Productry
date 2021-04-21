@@ -24,9 +24,15 @@ namespace Productry.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ProductryDbContext>();
-            services.AddDbContext<ProductryDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
+            
+            //services.AddDbContext<ProductryDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
+
+            services.AddDbContext<ProductryDbContext>(options =>
+                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                  b => b.MigrationsAssembly("Productry.Data")));
 
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IComprasRepository, ComprasRepository>();
 
             services.AddAutoMapper(typeof(Startup));
 
