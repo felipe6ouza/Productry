@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Productry.Bussiness.Interfaces;
+using Productry.Data.Context;
+using Productry.Data.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Productry.API
 {
@@ -23,18 +21,35 @@ namespace Productry.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ProductryDbContext>();
+            services.AddDbContext<ProductryDbContext>(opt => opt.UseInMemoryDatabase("InMemoryDb"));
+
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Productry.API", Version = "v1" });
-            });
+                c.SwaggerDoc("v1", new OpenApiInfo
+
+                {
+                    Title = "Curriculo Api",
+                    Version = "v1",
+                    Description = "A challenge resolution in ASP.NET Core Web API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Felipe Souza",
+                        Email = "felipe6ouza@outlook.com",
+                        Url = new Uri("https://github.com/felipe6ouza"),
+                    },
+
+                });
+        });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
