@@ -1,4 +1,6 @@
-﻿namespace Productry.Bussiness.Models
+﻿using Productry.Bussiness.Contracts;
+
+namespace Productry.Bussiness.Models
 {
     public class Cartao : Entity
     {
@@ -9,6 +11,8 @@
             DataExpiracao = dataExpiracao;
             Bandeira = bandeira;
             Cvv = cvv;
+
+            AddNotifications(new ValidCardContract(this));
         }
 
         public string Titular { get; private set; }

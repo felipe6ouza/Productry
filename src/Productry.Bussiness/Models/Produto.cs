@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Productry.Bussiness.Contracts;
+using System;
 using System.Collections.Generic;
 
 namespace Productry.Bussiness.Models
@@ -11,6 +12,8 @@ namespace Productry.Bussiness.Models
             ValorUnitario = QtdeEstoque;
             QtdeEstoque = qtdeEstoque;
             DataCadastro = DateTime.Now;
+
+            AddNotifications(new CreateProductContract(this));
         }
 
         public string Nome { get; private set; }
@@ -22,35 +25,26 @@ namespace Productry.Bussiness.Models
         public List<Compra> Compras { get; set; }
 
 
-        public bool AlteraNome(string novoNome)
-        {
-            if (string.IsNullOrEmpty(novoNome))
-                return false;
-            
+        public void AlterarNome(string novoNome)
+        {          
             Nome = novoNome;
-            return true;
+            AddNotifications(new UpdateProductName(this));
         }
 
-        public bool AlteraEstoque(int novaQuantidade)
+        public void AlterarEstoque(int novaQuantidade)
         {
-            if (novaQuantidade < 0)
-                return false;
-
             QtdeEstoque = novaQuantidade;
-
-            return true;
+            AddNotifications(new UpdateStockContract(this));
         }
 
-        public bool AlteraValorUnitario(double novoValor)
+        public void AlteraValorUnitario(double novoValor)
         {
-            if (novoValor < 0)
-                return false;
-
             ValorUnitario = novoValor;
-            return true;
+            AddNotifications(new UpdateProductValue(this));
+
         }
 
-     
+
 
     }
 }

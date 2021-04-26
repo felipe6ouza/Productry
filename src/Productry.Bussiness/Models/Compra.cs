@@ -1,25 +1,27 @@
-﻿using System;
+﻿using Productry.Bussiness.Contracts;
+using System;
 
 namespace Productry.Bussiness.Models
 {
 
     public class Compra : Entity
     {
-        public Compra()
-        {
-            DataCompra = DateTime.Now;
-        }
+ 
         public Compra(int produtoId, int qtdeComprada, Cartao cartao)
         {
             ProdutoId = produtoId;
             QtdeComprada = qtdeComprada;
             Cartao = cartao;
             DataCompra = DateTime.Now;
+
+            AddNotifications(new ValidCardContract(this.Cartao));
         }
 
         public int ProdutoId { get; set; }
 
         public int QtdeComprada { get; set; }
+
+        public int CartaoId { get; set; }
 
         public Cartao Cartao { get; set; }
 
