@@ -9,12 +9,14 @@ namespace Productry.Bussiness.Contracts
     {
         public ValidCardContract(Cartao cartao)
         {
+            var data = DateTime.ParseExact(cartao.DataExpiracao,
+                        "dd-MM-yyyy", CultureInfo.CreateSpecificCulture("pt-BR"));
+
             Requires()
                 .IsCreditCard(cartao.Numero, "Numero", "Cartão de Crédito Inválido.")
                 .IsNotNullOrEmpty(cartao.Titular, "Titular", "Nome do Titular Inválido.")
-                .IsGreaterThan(DateTime.ParseExact(cartao.DataExpiracao,
-                        "dd-MM-yyyy", CultureInfo.CreateSpecificCulture("pt-BR")),
-                         DateTime.Now,
+                .IsGreaterThan(data,
+                         DateTime.Today,
                         "DataExpiracao",
                         "Cartão expirado.");
         }

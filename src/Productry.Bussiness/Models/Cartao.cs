@@ -15,14 +15,14 @@ namespace Productry.Bussiness.Models
             AddNotifications(new ValidCardContract(this));
         }
 
-        public string Titular { get; private set; }
+        public string Titular { get;  set; }
 
-        public string Numero { get; private set; }
+        public string Numero { get;  set; }
 
-        public string DataExpiracao { get; private set; }
+        public string DataExpiracao { get;  set; }
 
-        public string Bandeira { get; private set; }
+        public string Bandeira { get;  set; }
 
-        public string Cvv { get; private set; }
+        public string Cvv { get;  set; }
     }
 }

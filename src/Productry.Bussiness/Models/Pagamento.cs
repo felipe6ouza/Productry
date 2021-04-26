@@ -12,6 +12,10 @@ namespace Productry.Bussiness.Models
             AddNotifications(new ValidCardContract(this.Cartao), new PaymentContract(this));
         }
 
+        private Pagamento (double valor)
+        {
+            Valor = valor;
+        }
         public int CartaoId { get; set; }
 
         public double Valor { get; set; }

@@ -8,7 +8,7 @@ namespace Productry.Bussiness.Contracts
         public UpdateProductValue(Produto produto)
         {
             Requires()
-                .IsLowerThan(produto.ValorUnitario, 0, "ValorUnitario", "O valor do produto não pode ser menor do que zero.");
+                .IsGreaterOrEqualsThan(produto.ValorUnitario, 0, "ValorUnitario", "O valor do produto não pode ser menor do que zero.");
         }
     }
 }

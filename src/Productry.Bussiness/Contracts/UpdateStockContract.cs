@@ -8,7 +8,7 @@ namespace Productry.Bussiness.Contracts
         public UpdateStockContract(Produto produto)
         {
             Requires()
-                .IsLowerThan(produto.QtdeEstoque, 0, "QtdeEstoque", "O estoque não pode ser menor do que zero.");
+                .IsGreaterOrEqualsThan(produto.QtdeEstoque, 0, "QtdeEstoque", "O estoque não pode ser menor do que zero.");
         }
     }
 }

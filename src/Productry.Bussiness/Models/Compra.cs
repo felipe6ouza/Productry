@@ -17,6 +17,12 @@ namespace Productry.Bussiness.Models
             AddNotifications(new ValidCardContract(this.Cartao));
         }
 
+        private Compra(int produtoId, int qtdeComprada)
+        {
+            ProdutoId = produtoId;
+            QtdeComprada = qtdeComprada;
+        }
+
         public int ProdutoId { get; set; }
 
         public int QtdeComprada { get; set; }

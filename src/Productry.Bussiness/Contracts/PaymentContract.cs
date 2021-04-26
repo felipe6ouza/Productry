@@ -7,7 +7,8 @@ namespace Productry.Bussiness.Contracts
     {
         public PaymentContract(Pagamento pagamento)
         {
-            Requires().IsLowerThan(pagamento.Valor, 100, "Valor", "Pagamento Recusado.");
+            Requires()
+                .IsGreaterThan(pagamento.Valor, 100, "Valor", "Pagamento Recusado.");
         }
     }
 }
