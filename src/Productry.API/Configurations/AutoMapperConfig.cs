@@ -13,18 +13,20 @@ namespace Productry.API.Configurations
             CreateMap<Compra, CompraViewModel>();
         }
 
-    public class ViewModelToBusinessEntity : Profile
-    {
-        public ViewModelToBusinessEntity()
+        public class ViewModelToBusinessEntity : Profile
         {
-            CreateMap<ProdutoViewModel, Produto>()
-                    .ConstructUsing(p=> new Produto(p.Nome, p.ValorUnitario, p.QtdeEstoque));
+            public ViewModelToBusinessEntity()
+            {
+                CreateMap<ProdutoViewModel, Produto>()
+                        .ConstructUsing(p => new Produto(p.Nome, p.ValorUnitario, p.QtdeEstoque));
 
-            CreateMap<CartaoViewModel, Cartao>()
-                   .ConstructUsing(c => new Cartao(c.Titular, c.Numero, c.DataExpiracao, c.Bandeira,c.Cvv));
+                CreateMap<CartaoViewModel, Cartao>()
+                       .ConstructUsing(c => new Cartao(c.Titular, c.Numero, c.DataExpiracao, c.Bandeira, c.Cvv));
 
-            CreateMap<CompraViewModel, Compra>()
-                   .ConstructUsing(c => new Compra(c.ProdutoId, c.QtdeComprada, c.Cartao));
+                CreateMap<CompraViewModel, Compra>()
+                       .ConstructUsing(c => new Compra(c.ProdutoId, c.QtdeComprada,
+                       new Cartao(c.Cartao.Titular, c.Cartao.Numero, c.Cartao.DataExpiracao, c.Cartao.Bandeira, c.Cartao.Cvv)));
+            }
         }
     }
 }
