@@ -20,7 +20,8 @@ namespace Productry.Data.Mappings
             builder.HasOne(p => p.Produto).WithMany(c => c.Compras).HasForeignKey(p=> p.ProdutoId);
 
             // 1 : N => Compra-Cartao
-            builder.HasOne(c => c.Cartao).WithMany();
+            builder.HasOne(c => c.Cartao).WithMany().HasForeignKey(c => c.CartaoId);
+
         }
     }
 }

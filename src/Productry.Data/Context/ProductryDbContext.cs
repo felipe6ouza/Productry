@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Flunt.Notifications;
+using Microsoft.EntityFrameworkCore;
 using Productry.Bussiness.Models;
 
 namespace Productry.Data.Context
@@ -8,11 +9,13 @@ namespace Productry.Data.Context
         public ProductryDbContext(DbContextOptions<ProductryDbContext> options) : base(options) { }
 
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<Cartao> Cartoes { get; set; }
         public DbSet<Compra> Compras { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<Notification>();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductryDbContext).Assembly);
         }
     }

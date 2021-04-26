@@ -26,16 +26,20 @@ namespace Productry.Data.Repository
             return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
 
-        public async Task Adicionar(T entity)
+        public async Task<bool> Adicionar(T entity)
         {
             DbSet.Add(entity);
-            await SaveChanges();
+            var added =  await SaveChanges();
+
+            return added > 1;
         }
 
-        public async Task Atualizar(T entity)
+        public async Task <bool> Atualizar(T entity)
         {
             DbSet.Update(entity);
-            await SaveChanges();
+            var modified = await SaveChanges();
+
+            return modified > 1;
         }
 
         public virtual async Task<T> ObterPorId(int id)
