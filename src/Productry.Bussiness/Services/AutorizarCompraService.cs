@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Productry.Bussiness.Services
 {
-    public class AutorizarCompraService : BaseService, IAutorizarCompraService
+    public class AutorizarCompraService : IAutorizarCompraService
     {
         private readonly IPagamentoRepository _pagamentoRepository;
 
-        public AutorizarCompraService(IPagamentoRepository pagamentoRepository, INotificador notificador) : base(notificador)
+        public AutorizarCompraService(IPagamentoRepository pagamentoRepository)
         {
             _pagamentoRepository = pagamentoRepository;
         }
@@ -17,12 +17,7 @@ namespace Productry.Bussiness.Services
         public async Task<bool> AutorizarCompra(Pagamento pagamento)
         {
             if (!pagamento.IsValid)
-            {
-                foreach(var item in  pagamento.Notifications)
-                {
-                    Notificar(item.Message);
-                }
-
+            { 
                 return false;
             }
 
