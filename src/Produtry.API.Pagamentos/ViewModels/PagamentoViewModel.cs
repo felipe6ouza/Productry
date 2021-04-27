@@ -7,7 +7,7 @@ namespace Produtry.API.Pagamentos.ViewModels
     {
         [JsonProperty("valor")]
         [Required(ErrorMessage = "O campo é {0} obrigatório")]
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
 
         [JsonProperty("cartao")]
         [Required(ErrorMessage = "O campo é {0} obrigatório")]

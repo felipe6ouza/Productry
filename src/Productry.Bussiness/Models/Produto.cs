@@ -6,7 +6,7 @@ namespace Productry.Bussiness.Models
 {
     public class Produto : Entity
     {
-        public Produto(string nome, double valorUnitario, int qtdeEstoque)
+        public Produto(string nome, decimal valorUnitario, int qtdeEstoque)
         {
             Nome = nome;
             ValorUnitario = QtdeEstoque;
@@ -17,7 +17,7 @@ namespace Productry.Bussiness.Models
         }
 
         public string Nome { get; private set; }
-        public double ValorUnitario { get; private set; }
+        public decimal ValorUnitario { get; private set; }
         public int QtdeEstoque { get; private set; }
         public DateTime DataCadastro { get; private set; }
         
@@ -37,7 +37,7 @@ namespace Productry.Bussiness.Models
             AddNotifications(new UpdateStockContract(this));
         }
 
-        public void AlteraValorUnitario(double novoValor)
+        public void AlteraValorUnitario(decimal novoValor)
         {
             ValorUnitario = novoValor;
             AddNotifications(new UpdateProductValue(this));

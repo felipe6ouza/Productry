@@ -5,9 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Productry.API.Configurations;
+using Productry.Bussiness.Configurations;
 using Productry.Bussiness.Interfaces;
+using Productry.Bussiness.Services;
 using Productry.Data.Context;
 using Productry.Data.Repository;
+using Productry.Services.Services;
 using System;
 
 namespace Productry.API
@@ -31,8 +35,14 @@ namespace Productry.API
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                   b => b.MigrationsAssembly("Productry.Data")));
 
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.Configure<ConexaoGateway>(Configuration.GetSection("Gateway"));
+
             services.AddScoped<IComprasRepository, ComprasRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IEstoqueService, EstoqueService>();
+            services.AddScoped<ICompraService, CompraService>();
+
+
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -54,6 +64,7 @@ namespace Productry.API
 
                 });
         });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

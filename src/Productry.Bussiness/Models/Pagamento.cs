@@ -4,7 +4,7 @@ namespace Productry.Bussiness.Models
 {
     public class Pagamento : Entity
     {
-        public Pagamento(double valor, Cartao cartao)
+        public Pagamento(decimal valor, Cartao cartao)
         {
             Valor = valor;
             Cartao = cartao;
@@ -12,13 +12,13 @@ namespace Productry.Bussiness.Models
             AddNotifications(new ValidCardContract(this.Cartao), new PaymentContract(this));
         }
 
-        private Pagamento (double valor)
+        private Pagamento (decimal valor)
         {
             Valor = valor;
         }
         public int CartaoId { get; set; }
 
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
         public Cartao Cartao { get; set; }
         protected bool Aprovado => IsValid;
 

@@ -1,15 +1,14 @@
 ﻿using Productry.Bussiness.Interfaces;
-using Productry.Bussiness.Services;
 using System.Threading.Tasks;
 
 namespace Productry.Services.Services
 {
-    public class EstoqueService : BaseService, IEstoqueService
+    public class EstoqueService : IEstoqueService
     {
 
         private readonly IProdutoRepository _produtoRepository;
 
-        public EstoqueService(IProdutoRepository produtoRepository, INotificador notificador) : base(notificador)
+        public EstoqueService(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
         }
@@ -25,11 +24,6 @@ namespace Productry.Services.Services
 
             if(!produto.IsValid)
             {
-                foreach(var item in produto.Notifications)
-                {
-                    Notificar(item.Message);
-                }
-
                 return false;
             }
            
