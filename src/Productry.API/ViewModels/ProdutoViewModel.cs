@@ -18,7 +18,7 @@ namespace Productry.API.ViewModels
         public string Nome { get; set; }
 
         [JsonPropertyName("valor_unitario")]
-        public double ValorUnitario { get; set; }
+        public decimal ValorUnitario { get; set; }
 
         [Required(ErrorMessage = "O campo é {0} obrigatório")]
         [JsonPropertyName("qtde_estoque")]

@@ -17,7 +17,7 @@ namespace Productry.API.ViewModels
         public int QtdeComprada { get; set; }
 
         [JsonPropertyName("cartao")]
-        public Cartao Cartao { get; set; }
+        public CartaoViewModel Cartao { get; set; }
 
         public DateTime DataCompra { get; private set; }
 
